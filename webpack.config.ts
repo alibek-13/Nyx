@@ -1,34 +1,22 @@
 import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
+import {buildWebpackConfig} from "./config/build/buildWebpackConfig";
+import {BuildPaths} from "./config/build/type/config";
 
-
-const config:webpack.Configuration = {
+const paths: BuildPaths = {
     entry: path.resolve(__dirname, 'src', 'index.ts'),
-    mode: "development",
-    module: {
-        rules: [
-            {
-                exclude: /node_modules/,
-                test: /\.([cm]?ts|tsx)$/,
-                use: 'ts-loader',
-            },
-        ],
-    },
-    output: {
-        filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, 'dist'),
-        clean: true,
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.html')
-        }),
-        new webpack.ProgressPlugin(),
-    ],
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-    }
+    build: path.resolve(__dirname, 'dist'),
+    html: path.resolve(__dirname, 'public', 'index.html'),
+
 }
+const mode = 'development'
+const isDev = mode === 'development'
+
+const config:webpack.Configuration = buildWebpackConfig({
+    mode: "production",
+    paths,
+    isDev
+
+})
 
 export default config;
