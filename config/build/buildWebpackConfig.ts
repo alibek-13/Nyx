@@ -1,6 +1,6 @@
 import {BuildOptions} from "./type/config";
 import webpack from "webpack";
-import {buildRules} from "./buildRules";
+import {buildLoader} from "./buildLoader";
 import {buildPlugins} from "./buildPlugins";
 import {buildResolve} from "./buildResolve";
 import {buildDevServer} from "./buildDevServer";
@@ -15,7 +15,7 @@ export function buildWebpackConfig (option: BuildOptions):webpack.Configuration 
             maxEntrypointSize: 512000,
         },
         module: {
-            rules: buildRules(),
+            rules: buildLoader(option),
         },
         output: {
             filename: '[name].[contenthash].js',
