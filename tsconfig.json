@@ -6,6 +6,10 @@
     "target": "ES6",
     "module": "esnext",
     "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./src/*"]
+    },
     "allowJs": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
